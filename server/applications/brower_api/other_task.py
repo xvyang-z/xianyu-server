@@ -38,3 +38,26 @@ def open_fish_currency_deduction():
     except Exception:
         db.session.rollback()
         return Resp.fail('加入任务列表失败!')
+
+
+@bp.route('/promotion', methods=['POST'])
+def promotion():
+    params = process_requset_data()
+    device_id: int = params["id"]
+    desc: str = params["desc"]
+    price: float = params["price"]
+    task = Task(
+        user_id=g.user_info.id,
+        device_id=device_id,
+        cmd_args={'desc': desc, 'price': price},
+        # cmd=
+    )
+    db.session.add(task)
+    try:
+        db.session.commit()
+        return Resp.success(None, '已加入任务列表, 请到任务列表中查看')
+    except Exception:
+        db.session.rollback()
+        return Resp.fail('加入任务列表失败!')
+
+
