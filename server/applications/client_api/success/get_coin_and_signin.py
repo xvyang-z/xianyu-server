@@ -8,10 +8,10 @@ from applications.model.user_task import Task
 from exts import db
 
 
-@__bp.route('/success/open_fish_currency_deduction', methods=['POST'])
-def open_fish_currency_deduction():
+@__bp.route('/success/get_coin_and_signin', methods=['POST'])
+def get_coin_and_signin():
     """
-    开启抵扣闲鱼币成功后调用这个接口
+    签到闲鱼币成功后调用这个接口
     """
 
     params = process_requset_data()
