@@ -57,23 +57,3 @@ middle_ware_init(app)
 @app.route('/uploads/<path:filename>')
 def upload_file(filename):
     return send_from_directory(FILE_UPLOAD_PATH, filename)
-
-
-# fixme 创建一些地区的测试数据
-# with app.app_context():
-#     try:
-#         db.session.execute(
-#             text('''INSERT INTO "prod_location" ("id", "level", "parent_id", "name") VALUES
-#             (1, 1, 0, '北京'),
-#             (2, 1, 0, '广东'),
-#             (3, 2, 1, '北京'),
-#             (4, 2, 2, '广州'),
-#             (5, 3, 3, '东城区'),
-#             (6, 3, 3, '西城区'),
-#             (7, 3, 4, '番禺区'),
-#             (8, 3, 4, '白云区');''')
-#         )
-#     except Exception as e:
-#         ...
-#     db.session.commit()
-# ## fixme end

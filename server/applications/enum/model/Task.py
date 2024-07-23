@@ -10,6 +10,10 @@ class cmd(StrEnum):
     商品降价 = '商品降价'
     开启闲鱼币抵扣 = '开启闲鱼币抵扣'
 
+    # todo 定时 生成 签到 一键擦亮任务
+    # 一键擦亮 = '一键擦亮'
+    # 签到闲鱼币 = '签到闲鱼币'
+
 
 # 这些 cmd 的 cmd_args 中 有 ProductToDevice 的 id, 用于任务执行前/后 更新状态 等操作
 group_p2d_cmd = [

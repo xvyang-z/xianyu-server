@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 
 
@@ -13,6 +14,12 @@ JWT_SECRET_KEY = '8UmlG5dcAyPYOFsqTPTX9FgLga4iYkL2pIJQKoG7Z4auoNQVn9hOjYKznFeYJX
 
 # jwt 过期时间 (小时)
 JWT_EXPIRE_HOURS = 24 * 30
+
+
+# 定时检测超时任务的间隔 (秒)
+CHECK_TIMED_TASK_INTERVAL = 20
+# 任务执行多久还没完算超时
+TASK_TIMEOUT_THRESHOLD = timedelta(minutes=5)
 
 
 # 请求接口前缀

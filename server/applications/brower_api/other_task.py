@@ -1,16 +1,12 @@
-import json
-
 from flask import Blueprint
 from flask.globals import g
 
 from applications import enum
 from applications.common.resp import Resp
-from applications.model.user_device import Device
-from applications.model.user_product_to_device import ProductToDevice
-from applications.model.user_task import Task
-from setting import API_PREFIX
-from exts import db
 from applications.library.parse_req_data import process_requset_data
+from applications.model.user_task import Task
+from exts import db
+from setting import API_PREFIX
 
 bp = Blueprint(
     __file__.replace('.', ''),
@@ -40,24 +36,22 @@ def open_fish_currency_deduction():
         return Resp.fail('加入任务列表失败!')
 
 
-@bp.route('/promotion', methods=['POST'])
-def promotion():
-    params = process_requset_data()
-    device_id: int = params["id"]
-    desc: str = params["desc"]
-    price: float = params["price"]
-    task = Task(
-        user_id=g.user_info.id,
-        device_id=device_id,
-        cmd_args={'desc': desc, 'price': price},
-        # cmd=
-    )
-    db.session.add(task)
-    try:
-        db.session.commit()
-        return Resp.success(None, '已加入任务列表, 请到任务列表中查看')
-    except Exception:
-        db.session.rollback()
-        return Resp.fail('加入任务列表失败!')
-
-
+# @bp.route('/promotion', methods=['POST'])
+# def promotion():
+#     params = process_requset_data()
+#     device_id: int = params["id"]
+#     desc: str = params["desc"]
+#     price: float = params["price"]
+#     task = Task(
+#         user_id=g.user_info.id,
+#         device_id=device_id,
+#         cmd_args={'desc': desc, 'price': price},
+#         # cmd=
+#     )
+#     db.session.add(task)
+#     try:
+#         db.session.commit()
+#         return Resp.success(None, '已加入任务列表, 请到任务列表中查看')
+#     except Exception:
+#         db.session.rollback()
+#         return Resp.fail('加入任务列表失败!')

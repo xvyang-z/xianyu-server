@@ -32,7 +32,6 @@ def crawl():
             new_products.append(Product(
                 uuid=product['uuid'],
                 price=product['price'],
-                # price=random.randrange(90000000, 99999999),  # fixme 测试用, 防止有人拍下
                 desc=product['desc'],
                 images=product['images'],
                 user_id=g.user_info.id,

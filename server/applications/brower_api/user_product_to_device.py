@@ -19,11 +19,6 @@ bp = Blueprint(
 )
 
 
-# 此时逻辑: 多选操作时, 只要有一个不符合条件就直接返回
-# todo 要不要去掉`if len(results) != len(ids)`, 改成多选仅操作可操作的, 跳过不可操作的
-# todo 也可以查询时仅用 id.in_, 在循环中返回具体的报错响应
-
-
 # 分页
 @bp.route('/paging', methods=['POST'])
 def paging():

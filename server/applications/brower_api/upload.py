@@ -12,9 +12,6 @@ bp = Blueprint(
 )
 
 
-# todo 图片类型校验
-
-
 # 用户自己上传用户头像
 @bp.route('/user_avatar', methods=['POST'])
 def user_avatar():

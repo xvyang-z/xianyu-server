@@ -1,5 +1,4 @@
 import datetime
-import json
 import time
 
 from flask import Flask
@@ -10,6 +9,7 @@ from applications.enum.model.Task import group_p2d_cmd
 from applications.model.user_product_to_device import ProductToDevice
 from applications.model.user_task import Task
 from exts import db
+from setting import CHECK_TIMED_TASK_INTERVAL, TASK_TIMEOUT_THRESHOLD
 
 
 def check_user_task_is_timeout(app: Flask):
@@ -20,7 +20,7 @@ def check_user_task_is_timeout(app: Flask):
     """
     with app.app_context():
         while True:
-            five_minutes_ago = datetime.datetime.now() - datetime.timedelta(minutes=5)  # todo 配置项
+            five_minutes_ago = datetime.datetime.now() - TASK_TIMEOUT_THRESHOLD
 
             # 这一堆是是执行超时的情况, 当客户端网络问题无法发请求时, 任务会一直处于 运行中 或 重试中 状态
             tasks: list[Task] = (
@@ -48,4 +48,4 @@ def check_user_task_is_timeout(app: Flask):
             except Exception:
                 db.session.rollback()
 
-            time.sleep(10)  # todo 配置项
+            time.sleep(CHECK_TIMED_TASK_INTERVAL)
