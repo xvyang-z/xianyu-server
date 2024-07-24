@@ -36,6 +36,48 @@ def open_fish_currency_deduction():
         return Resp.fail('加入任务列表失败!')
 
 
+@bp.route('/polish', methods=['POST'])
+def polish():
+    params = process_requset_data()
+    device_ids = params.get("device_ids", [])
+    # 加入任务
+    for device_id in device_ids:
+        # 在这里处理每个设备 ID 的逻辑
+        task = Task(
+            user_id=g.user_info.id,
+            device_id=device_id,
+            cmd=enum.Task.cmd.一键擦亮,
+        )
+        db.session.add(task)
+    try:
+        db.session.commit()
+        return Resp.success(None, '已加入任务列表, 请到任务列表中查看')
+    except Exception as e:
+        db.session.rollback()
+        return Resp.fail('加入任务列表失败!')
+
+
+@bp.route('/get_coin_and_signin', methods=['POST'])
+def get_coin_and_signin():
+    params = process_requset_data()
+    device_ids = params.get("device_ids", [])
+    # 加入任务
+    for device_id in device_ids:
+        # 在这里处理每个设备 ID 的逻辑
+        task = Task(
+            user_id=g.user_info.id,
+            device_id=device_id,
+            cmd=enum.Task.cmd.签到闲鱼币,
+        )
+        db.session.add(task)
+    try:
+        db.session.commit()
+        return Resp.success(None, '已加入任务列表, 请到任务列表中查看')
+    except Exception:
+        db.session.rollback()
+        return Resp.fail('加入任务列表失败!')
+
+
 # @bp.route('/promotion', methods=['POST'])
 # def promotion():
 #     params = process_requset_data()
