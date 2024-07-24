@@ -43,7 +43,7 @@ def crawl():
         task: Task = Task.query.get(task_id)
         task.cmd_state = enum.Task.cmd_state.执行成功
         task.set_cmd_info('执行成功')
-        task.end_time = datetime.datetime.now()
+        task.end_time = datetime.datetime.utcnow()
 
         db.session.commit()
         return Resp.success()

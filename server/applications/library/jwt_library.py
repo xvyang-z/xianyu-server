@@ -13,7 +13,7 @@ token_prefix = 'Bearer '
 # 生成token
 def create_jwt_token(user_id: int, user_name: str) -> str:
     # 设置token过期时间
-    expiration_time = datetime.datetime.now() + datetime.timedelta(hours=JWT_EXPIRE_HOURS)
+    expiration_time = datetime.datetime.utcnow() + datetime.timedelta(hours=JWT_EXPIRE_HOURS)
 
     # 准备payload，可以根据需要添加更多字段
     payload = {

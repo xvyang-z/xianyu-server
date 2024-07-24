@@ -166,7 +166,7 @@ def update():
     user.avatar = new_avatar
 
     user.desc = new_desc
-    user.update_time = datetime.now()
+    user.update_time = datetime.utcnow()
 
     try:
         db.session.commit()

@@ -31,5 +31,5 @@ class User(db.Model):
     vip_end_date = Column(DateTime, comment='会员订阅到期时间')
     vip_auto_renew = Column(Boolean, default=False, nullable=False, comment='是否自动续订vip')
 
-    create_time = Column(DateTime, default=datetime.datetime.now, nullable=False, comment='创建时间')
-    update_time = Column(DateTime, default=datetime.datetime.now, nullable=False, comment='更新时间')
+    create_time = Column(DateTime, default=datetime.datetime.utcnow, nullable=False, comment='创建时间')
+    update_time = Column(DateTime, default=datetime.datetime.utcnow, nullable=False, comment='更新时间')

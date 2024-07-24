@@ -23,7 +23,7 @@ def republish():
     task: Task = Task.query.get(task_id)
     task.cmd_state = enum.Task.cmd_state.执行成功
     task.set_cmd_info('执行成功')
-    task.end_time = datetime.datetime.now()
+    task.end_time = datetime.datetime.utcnow()
 
     # 更新对应的 发布表 ProductToDevice 中的数据为已发布状态
     id_ = task.cmd_args['id']
@@ -31,7 +31,7 @@ def republish():
     p2d: ProductToDevice = ProductToDevice.query.get(id_)
     p2d.publish_state = enum.ProductToDevice.publish_state.已发布
     p2d.is_in_operation = False
-    p2d.publish_time = datetime.datetime.now()
+    p2d.publish_time = datetime.datetime.utcnow()
 
     try:
         db.session.commit()

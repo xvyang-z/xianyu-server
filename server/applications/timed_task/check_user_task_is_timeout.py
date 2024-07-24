@@ -20,7 +20,7 @@ def check_user_task_is_timeout(app: Flask):
     """
     with app.app_context():
         while True:
-            five_minutes_ago = datetime.datetime.now() - TASK_TIMEOUT_THRESHOLD
+            five_minutes_ago = datetime.datetime.utcnow() - TASK_TIMEOUT_THRESHOLD
 
             # 这一堆是是执行超时的情况, 当客户端网络问题无法发请求时, 任务会一直处于 运行中 或 重试中 状态
             tasks: list[Task] = (
@@ -35,7 +35,7 @@ def check_user_task_is_timeout(app: Flask):
             )
 
             for task in tasks:
-                task.end_time = datetime.datetime.now()
+                task.end_time = datetime.datetime.utcnow()
                 task.cmd_state = enum.Task.cmd_state.执行超时
 
                 if task.cmd in group_p2d_cmd:

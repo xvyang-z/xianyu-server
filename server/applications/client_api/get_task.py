@@ -45,7 +45,7 @@ def get_task():
         # 跳过重试次数达到上限的
         if task.exe_count == TASK_MAX_RETEY:
             task.cmd_state = enum.Task.cmd_state.次数用尽  # 执行状态不用`执行失败`, 否则下次还会查出来, 这里会被重复执行
-            task.end_time = datetime.datetime.now()
+            task.end_time = datetime.datetime.utcnow()
 
             if task.cmd in group_p2d_cmd:
                 p2d_id = task.cmd_args['id']
@@ -78,7 +78,7 @@ def get_task():
             task.cmd_state = enum.Task.cmd_state.重试中
 
         task.exe_count += 1  # 执行次数 +1
-        task.start_time = datetime.datetime.now()  # 重新设置执行开始时间
+        task.start_time = datetime.datetime.utcnow()  # 重新设置执行开始时间
 
         result.append({
             'task_id': task.id,
