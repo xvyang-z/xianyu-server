@@ -1,9 +1,0 @@
-**/__pycache__
-
-.idea
-server/instance
-
-server/uploads/sys
-server/uploads/user
-
-venv
